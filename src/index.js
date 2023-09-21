@@ -37,3 +37,7 @@ initDB().then(async () => {
         </Provider>,
     );
 });
+export { saveLsItem } from './utils/local-storage';
+export { loadLsItem } from './utils/local-storage';
+export { getBondsData } from './features/bonds-cache/services/get-bonds-data';
+export { storage } from './features/bonds-cache/services/storage';

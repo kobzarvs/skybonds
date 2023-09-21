@@ -5,92 +5,33 @@ import { useEffect, useRef, useState } from 'react';
 import { Inspector } from '@observablehq/inspector';
 import dayjs from 'dayjs';
 import { date as formatDate, usd, vol } from '../../../utils/decorators';
+import { loadLsItem, saveLsItem } from '../../../utils/local-storage';
+import { getBondsData } from '../services/get-bonds-data';
+import { storage } from '../services/storage';
+
 import styles from './styles.module.css';
 import './viewer.css';
 
-
-let _cache = { cache: {} };
-
-try {
-    _cache = JSON.parse(localStorage.getItem('bonds-cache')) ?? _cache;
-} catch (e) {
-    //
-}
-
-const storage = _cache;
-
-
 let objectViewer;
-
-export const getBondsData = async ({
-    date,
-    isins,
-}) => {
-    const results = [];
-    const notFoundIsins = new Set();
-
-    isins.forEach((isin) => {
-        // ищем в in-memory cache
-        const item = storage.cache[date + '.' + isin];
-        if (item) {
-            results.push(item);
-            item.src = 'Cache';
-        } else {
-            notFoundIsins.add(isin);
-        }
-    });
-
-    const res = await fetch(`/bonds/${date}`, {
-        method: 'POST',
-        body: JSON.stringify([...notFoundIsins]),
-    });
-
-    const freshData = await res.json();
-
-    freshData.forEach((item) => {
-        // сохраняем в in-memory cache
-        storage.cache[date + '.' + item.isin] = item;
-        item.src = 'Network';
-        results.push(item);
-    });
-
-    freshData?.length && localStorage.setItem('bonds-cache', JSON.stringify(storage));
-
-    return results;
-};
 
 
 export function BondCachePage() {
     const viewer = useRef();
-    let _date;
-    let _isins;
-    let _data;
 
-    try {
-        _date = JSON.parse(localStorage.getItem('bonds-cache-date'));
-        _date = _date ? new Date(_date) : new Date();
-        _isins = JSON.parse(localStorage.getItem('bonds-cache-isins')) ?? [];
-        _data = JSON.parse(localStorage.getItem('bonds-cache-data')) ?? [];
-    } catch (e) {
-        _date = new Date();
-        _isins = [];
-        _data = [];
-    }
-
-    const [date, setDate] = useState(_date);
-    const [isins, setIsins] = useState(_isins);
-    const [data, setData] = useState(_data);
+    const [date, setDate] = useState(new Date(loadLsItem('bonds-cache-date', new Date())));
+    const [isins, setIsins] = useState(loadLsItem('bonds-cache-isins', []));
+    const [data, setData] = useState(loadLsItem('bonds-cache-data', []));
 
     useEffect(() => {
-        localStorage.setItem('bonds-cache-data', JSON.stringify(data));
+        saveLsItem('bonds-cache-data', data);
     }, [data]);
 
     useEffect(() => {
-        localStorage.setItem('bonds-cache-isins', JSON.stringify(isins));
+        saveLsItem('bonds-cache-isins', isins);
     }, [isins]);
 
     useEffect(() => {
-        localStorage.setItem('bonds-cache-date', JSON.stringify(date));
+        saveLsItem('bonds-cache-date', date);
     }, [date]);
 
     useEffect(() => {
@@ -108,8 +49,6 @@ export function BondCachePage() {
         objectViewer.fulfilled(storage);
         setData(results);
     };
-
-    console.log('isins', isins, 'date', dayjs(date).format('YYYYMMDD'));
 
     return (
         <Group justify="flex-start" align="start">
@@ -190,5 +129,3 @@ export function BondCachePage() {
         </Group>
     );
 }
-
-window.dayjs = dayjs;
