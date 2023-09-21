@@ -1,11 +1,5 @@
-import styles from './styles.module.css';
 import React from 'react';
-import {
-    date as formatDate,
-    date,
-    usd,
-    vol,
-} from '../../../../utils/decorators';
+import { date as formatDate, usd, vol } from '../../../../utils/decorators';
 import { useSelector } from 'react-redux';
 import { Table } from '@mantine/core';
 

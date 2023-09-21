@@ -1,6 +1,4 @@
-import styles from './styles.module.css';
-import { Button, Pagination, Select, Optio, Group } from '@mantine/core';
-import { IconArrowLeft, IconArrowRight } from '@tabler/icons-react';
+import { Group, Pagination, Select } from '@mantine/core';
 
 export const Paginator = ({
     page,
@@ -21,14 +19,14 @@ export const Paginator = ({
         />
 
         <Group align="center">
-        <span>Page size</span>
+            <span>Page size</span>
 
-        <Select
-            value={pageSize}
-            onChange={(value) => onChangePageSize(+value)}
-            data={['10', '25', '50']}
-            w="100px"
-        />
+            <Select
+                value={pageSize}
+                onChange={(value) => onChangePageSize(+value)}
+                data={['10', '25', '50']}
+                w="100px"
+            />
         </Group>
     </Group>;
 };
