@@ -11,6 +11,7 @@ import { storage } from '../services/storage';
 
 import styles from './styles.module.css';
 import './viewer.css';
+import { useInputState, useLocalStorage } from '@mantine/hooks';
 
 let objectViewer;
 
@@ -18,21 +19,19 @@ let objectViewer;
 export function BondCachePage() {
     const viewer = useRef();
 
-    const [date, setDate] = useState(new Date(loadLsItem('bonds-cache-date', new Date())));
-    const [isins, setIsins] = useState(loadLsItem('bonds-cache-isins', []));
-    const [data, setData] = useState(loadLsItem('bonds-cache-data', []));
-
-    useEffect(() => {
-        saveLsItem('bonds-cache-data', data);
-    }, [data]);
-
-    useEffect(() => {
-        saveLsItem('bonds-cache-isins', isins);
-    }, [isins]);
-
-    useEffect(() => {
-        saveLsItem('bonds-cache-date', date);
-    }, [date]);
+    const [date, setDate] = useLocalStorage({
+        key: 'bonds-cache-date',
+        defaultValue: new Date(),
+        deserialize: (value) => new Date(JSON.parse(value)),
+    });
+    const [isins, setIsins] = useLocalStorage({
+        key: 'bonds-cache-isins',
+        defaultValue: [],
+    });
+    const [data, setData] = useLocalStorage({
+        key: 'bonds-cache-data',
+        defaultValue: [],
+    });
 
     useEffect(() => {
         if (!viewer.current) return;
