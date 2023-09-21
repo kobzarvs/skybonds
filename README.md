@@ -1,70 +1,77 @@
-# Getting Started with Create React App
+# Тестовое задание
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## Задания
 
-## Available Scripts
+* Долевое строительство
+* Кэш данных об облигациях
+* Карточка облигации
 
-In the project directory, you can run:
+## Структура проекта
 
-### `npm start`
+```
+src
+├── app
+│    ├── App.js              - основной компонент приложения
+│    └── __snapshots__       - снэпшоты для тестов
+├── features                 - папка с фичами
+│    ├── bond-card 
+│    │   ├── db              - indexedDB для хранения mock данных
+│    │   ├── services        - redux api, slices
+│    │   └── ui              - ui слой
+│    │       ├── bond-card   - компонент карточки облигации
+│    │       └── paginator 
+│    ├── bonds-cache         - Кэш данных об облигациях
+│    │   └── ui              - интерфейс для работы с кэшем
+│    └── shared-construction - Долевое строительство
+├── utils                    - Вспомогательные утилиты
+├── mocks                    - Моки внешнего API
+│    └── handlers.js         - mock обработчики запросов
+├── store.js                 - root redux store
+└── index.js                 - bootstrup приложения
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+```
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+## Тесты
+
+Тесты написаны для задачи "Долевое строительство", а также маленький тест для тестирования вэб интерфейса через снэпшоты. Для запуска тестов выполните команду:
 
 ### `npm test`
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+```
+Shared counstruction
+    convertToPercentageBigGenerator
+        ✓ should correctly convert fractions to percentages
+        ✓ should throw error for zero sum of fractions
+        ✓ should throw error for non-string fractions
+        ✓ should throw error for invalid number string
+        ✓ should handle large numbers without loss of precision
+    getArrayFromGenerator
+        ✓ should convert generator to array
+        ✓ should handle empty generators
+```
 
-### `npm run build`
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+## Долевое строительство
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+### `npm run examples:shares`
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+```
+Shares: [ '1.5', '3', '6', '1.5' ]
+Result: [ '12.500', '25.000', '50.000', '12.500' ]
+```
 
-### `npm run eject`
+### `npm run benchmark:shares`
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+```
+Execution Time for 4 elements: 0.178ms
+Execution Time for 10 elements: 0.026ms
+Execution Time for 1000000 elements: 451.993ms
+```
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+## Карточка облигации и Кэш данных об облигациях
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+### `npm start`
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+Запускает приложение. Откройте [http://localhost:3000](http://localhost:3000) чтобы увидеть результат.
 
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+![public/bond-card.mp4](public/bond-card.gif)

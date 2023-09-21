@@ -1,0 +1,218 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders learn react link 1`] = `
+<div
+  className="App"
+>
+  <header
+    className="header"
+  >
+    <span>
+      Bond Card
+    </span>
+    <button
+      className="resetButton"
+      disabled={false}
+      onClick={[Function]}
+      type="button"
+    >
+      Generate dataset
+    </button>
+  </header>
+  <main
+    className="main"
+  >
+    <div
+      className="card"
+    >
+      <header>
+        <h1
+          className="header"
+        >
+          <span>
+            Bond A
+          </span>
+          <span>
+            <span
+              data-dir="up"
+            >
+              $5,355.90
+            </span>
+          </span>
+        </h1>
+      </header>
+      <div
+        className="controls"
+      >
+        <label>
+          Select Bond:  
+          <select
+            onChange={[Function]}
+            value="RU000A0JX0J2"
+          >
+            <option
+              value="RU000A0JX0J2"
+            >
+              Bond A
+            </option>
+            <option
+              value="XS0971721963"
+            >
+              Bond B
+            </option>
+            <option
+              value="RU000A0JU4L3"
+            >
+              Bond C
+            </option>
+            <option
+              value="XS0971712345"
+            >
+              Bond D
+            </option>
+            <option
+              value="XS0971798765"
+            >
+              Bond E
+            </option>
+          </select>
+        </label>
+        <div>
+          <button
+            className="button"
+            data-active={false}
+            onClick={[Function]}
+          >
+            Week
+          </button>
+          <button
+            className="button"
+            data-active={true}
+            onClick={[Function]}
+          >
+            Month
+          </button>
+          <button
+            className="button"
+            data-active={false}
+            onClick={[Function]}
+          >
+            Quarter
+          </button>
+          <button
+            className="button"
+            data-active={false}
+            onClick={[Function]}
+          >
+            Year
+          </button>
+          <button
+            className="button"
+            data-active={false}
+            onClick={[Function]}
+          >
+            Maximum
+          </button>
+        </div>
+      </div>
+      <div>
+        Mocked ReactECharts
+      </div>
+      <select
+        className="parameters"
+        onChange={[Function]}
+        value="price"
+      >
+        <option
+          value="price"
+        >
+          Price
+        </option>
+        <option
+          value="yield"
+        >
+          Yield
+        </option>
+        <option
+          value="spread"
+        >
+          Spread
+        </option>
+        <option
+          value="volume"
+        >
+          Volume
+        </option>
+      </select>
+      <div
+        className="paginator"
+      >
+        <button
+          onClick={[Function]}
+          style={
+            Object {
+              "width": 40,
+            }
+          }
+          type="button"
+        >
+          &lt;
+        </button>
+        <label>
+          Page  
+          <select
+            onChange={[Function]}
+            style={
+              Object {
+                "minWidth": 60,
+              }
+            }
+            value={0}
+          />
+        </label>
+        <span>
+          of   
+          0
+        </span>
+        <button
+          onClick={[Function]}
+          style={
+            Object {
+              "width": 40,
+            }
+          }
+          type="button"
+        >
+          &gt;
+        </button>
+        <label>
+          Page size  
+          <select
+            onChange={[Function]}
+            value={10}
+          >
+            <option
+              value="10"
+            >
+              10
+            </option>
+            <option
+              value="25"
+            >
+              25
+            </option>
+            <option
+              value="50"
+            >
+              50
+            </option>
+          </select>
+        </label>
+      </div>
+      <h1>
+        No data
+      </h1>
+    </div>
+  </main>
+</div>
+`;

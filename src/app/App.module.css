@@ -1,0 +1,64 @@
+.App {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: stretch;
+    height: 100vh;
+}
+
+.header {
+    background: linear-gradient(45deg, #282c34, #282c34c0);
+    width: 100vw;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    font-size: calc(10px + 2vmin);
+    color: white;
+    flex: 0 0 50px;
+    padding: 0 20px;
+    box-sizing: border-box;
+}
+
+.main {
+    flex: 1 0 auto;
+    padding: 20px;
+    box-sizing: border-box;
+    width: 100%;
+}
+
+.footer {
+    background: linear-gradient(45deg,  #282c34d0, #282c34);
+    width: 100vw;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-end;
+    font-size: calc(10px + 1vmin);
+    color: white;
+    flex: 0 0 36px;
+    padding: 0 20px;
+    box-sizing: border-box;
+}
+
+.resetButton {
+    background: #f7e082;
+    font-size: 0.65em;
+    color: #333;
+    font-weight: bold;
+    padding: 6px 20px;
+    cursor: pointer;
+    border: none;
+    opacity: .9;
+    user-select: none;
+    position: relative;
+
+    &:disabled {
+        opacity: .5;
+        pointer-events: none;
+    }
+
+    &:hover:not(:disabled) {
+        opacity: 1;
+    }
+}
