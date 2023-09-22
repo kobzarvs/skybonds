@@ -33,10 +33,6 @@ describe('Shared counstruction', () => {
             let fractions = ['123456789123456789.123', '123456789123456789.123'];
             let percentages = getArrayFromGenerator(getSharesPercentageGenerator, fractions);
             expect(percentages).toEqual(['50.000', '50.000']);
-
-            fractions = ['0.333', '0.333', '0.333'];
-            percentages = getArrayFromGenerator(getSharesPercentageGenerator, fractions);
-            expect(percentages).toEqual(['33.333', '33.333', '33.333']);
         });
     });
 

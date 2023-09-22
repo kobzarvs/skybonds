@@ -7,14 +7,15 @@ export const handlers = [
     rest.post('/bonds/:date', (req, res, ctx) => {
         const { date } = req.params;
         const isins = JSON.parse(req.body);
-        const results = [];
+        const results = {};
 
         for (const isin of isins) {
             let bond = bondsDb[date + '.' + isin];
             if (!bond) {
                 console.error('data not found in database', date, isin);
+            } else {
+                results[isin] = bond;
             }
-            bond && results.push(bond);
         }
 
         return res(ctx.json(results));

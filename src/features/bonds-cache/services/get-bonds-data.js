@@ -12,7 +12,6 @@ export const getBondsData = async ({
         // ищем в in-memory cache
         const item = storage.cache[date + '.' + isin];
         if (item) {
-            results.push(item);
             item.src = 'Cache';
         } else {
             notFoundIsins.add(isin);
@@ -26,11 +25,12 @@ export const getBondsData = async ({
 
     const freshData = await res.json();
 
-    freshData.forEach((item) => {
-        // сохраняем в in-memory cache
-        storage.cache[date + '.' + item.isin] = item;
-        item.src = 'Network';
-        results.push(item);
+    isins.forEach((isin) => {
+        const bond = storage.cache[date + '.' + isin] ?? freshData[isin];
+        // сохраняем/перезаписываем в in-memory cache
+        storage.cache[date + '.' + isin] = bond;
+        bond.src ||= 'Network';
+        results.push(bond);
     });
 
     freshData?.length && saveLsItem('bonds-cache', storage);
